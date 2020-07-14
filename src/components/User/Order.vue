@@ -250,6 +250,7 @@ export default {
             vm.$router.push(`/checkout/${res.data.orderId}`);
           });
         }
+        vm.isLoading = true;
       });
     },
     delCart(item) {
