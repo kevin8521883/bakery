@@ -4,30 +4,32 @@
     <div class="text-right mt-4">
       <button class="btn btn-primary" @click="openCouponMOdal(false)">新增優惠券</button>
     </div>
-    <table class="table mt-4">
-      <thead>
-        <tr>
-          <th>名稱</th>
-          <th>折扣百分比</th>
-          <th>到期日</th>
-          <th width="120">是否啟用</th>
-          <th width="120">編輯</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="(item) in Coupon" :key="item.id">
-          <td>{{item.title}}</td>
-          <td>{{item.percent}}%</td>
-          <td>{{item.due_date|date}}</td>
-          <td v-if="item.is_enabled" class="text-success">已啟用</td>
-          <td v-if="!item.is_enabled" class="text-danger">未啟用</td>
-          <td class="btn-group">
-            <button class="btn btn-sm btn-outline-primary" @click="openCouponMOdal(true,item)">編輯</button>
-            <button class="btn btn-sm btn-outline-danger" @click="delCoupon(item.id)">刪除</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="table-responsive">
+      <table class="table mt-4">
+        <thead>
+          <tr>
+            <th>名稱</th>
+            <th>折扣百分比</th>
+            <th>到期日</th>
+            <th width="120">是否啟用</th>
+            <th width="120">編輯</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="(item) in Coupon" :key="item.id">
+            <td>{{item.title}}</td>
+            <td>{{item.percent}}%</td>
+            <td>{{item.due_date|date}}</td>
+            <td v-if="item.is_enabled" class="text-success">已啟用</td>
+            <td v-if="!item.is_enabled" class="text-danger">未啟用</td>
+            <td class="btn-group">
+              <button class="btn btn-sm btn-outline-primary" @click="openCouponMOdal(true,item)">編輯</button>
+              <button class="btn btn-sm btn-outline-danger" @click="delCoupon(item.id)">刪除</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
     <div
       class="modal fade"
@@ -117,7 +119,7 @@ export default {
         due_date: 0,
         code: ""
       },
-      due_date:'',
+      due_date: "",
       isNew: false
     };
   },
@@ -138,7 +140,9 @@ export default {
       } else {
         vm.tempCoupon = Object.assign({}, item);
         vm.isNew = false;
-        const dateAndTime = new Date(vm.tempCoupon.due_date * 1000).toISOString().split('T');
+        const dateAndTime = new Date(vm.tempCoupon.due_date * 1000)
+          .toISOString()
+          .split("T");
         vm.due_date = dateAndTime[0];
       }
     },
