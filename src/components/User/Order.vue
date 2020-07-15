@@ -240,17 +240,16 @@ export default {
     },
     creatOrder() {
       const vm = this;
-      vm.isLoading = true;
       const api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/order`;
       vm.$validator.validate().then(res => {
         if (res) {
           vm.$http.post(api, { data: vm.form }).then(res => {
             vm.$bus.$emit("upDataCart");
-            vm.isLoading = false;
             vm.$router.push(`/checkout/${res.data.orderId}`);
           });
+        }else{
+          vm.$bus.$emit("message:push", `欄位不得為空`, "danger");
         }
-        vm.isLoading = false;
       });
     },
     delCart(item) {
