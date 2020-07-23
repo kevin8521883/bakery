@@ -34,7 +34,7 @@
             >
               <h5 class="card-title text-dark">{{item.title}}</h5>
               <div class="d-flex justify-content-between align-items-baseline">
-                <div class="h4" v-if="item.price===item.origin_price">{{item.origin_price|currency}}</div>
+                <div class="h4 text-dark" v-if="item.price===item.origin_price">{{item.origin_price|currency}}</div>
                 <del
                   class="h6 text-secondary"
                   v-if="item.price!=item.origin_price"

@@ -5,10 +5,14 @@
       <div v-if="cart.final_total">
         <div class="row justify-content-center">
           <div class="col-md-9">
-            <div class="container row justify-content-around">
-              <div class="col-md-3 p-2 rounded-pill alert-success text-center">1.填寫訂購資料</div>
-              <div class="col-md-3 p-2 rounded-pill alert-secondary text-center my-3 my-md-0">2.金流付款</div>
-              <div class="col-md-3 p-2 rounded-pill alert-secondary text-center">3.訂單完成</div>
+            <div class="container">
+              <div class="row justify-content-around">
+                <div class="col-md-3 p-2 rounded-pill alert-success text-center">1.填寫訂購資料</div>
+                <div
+                  class="col-md-3 p-2 rounded-pill alert-secondary text-center my-3 my-md-0"
+                >2.金流付款</div>
+                <div class="col-md-3 p-2 rounded-pill alert-secondary text-center">3.訂單完成</div>
+              </div>
             </div>
           </div>
           <div class="col-md-9 mt-5">
@@ -247,7 +251,7 @@ export default {
             vm.$bus.$emit("upDataCart");
             vm.$router.push(`/checkout/${res.data.orderId}`);
           });
-        }else{
+        } else {
           vm.$bus.$emit("message:push", `欄位不得為空`, "danger");
         }
       });

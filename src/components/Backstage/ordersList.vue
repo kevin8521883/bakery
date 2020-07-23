@@ -5,18 +5,18 @@
       <table class="table">
         <thead>
           <tr>
-            <th width="120">購買時間</th>
-            <th width="300">Email</th>
-            <th>購買款項</th>
-            <th width="120">應付金額</th>
-            <th width="120">是否付款</th>
+            <th class="text-nowrap" width="120">購買時間</th>
+            <th class="text-nowrap" width="300">Email</th>
+            <th class="text-nowrap">購買款項</th>
+            <th class="text-nowrap" width="120">應付金額</th>
+            <th class="text-nowrap" width="120">是否付款</th>
           </tr>
         </thead>
         <tbody>
           <tr v-for="(item) in sortOrder" :key="item.id">
             <td>{{item.create_at|date}}</td>
-            <td>{{item.user.email}}</td>
-            <td>
+            <td class="text-nowrap">{{item.user.email}}</td>
+            <td class="text-nowrap">
               <ul class="list-unstyled">
                 <li
                   v-for="(itemProducts) in item.products"
@@ -55,7 +55,7 @@ export default {
       const vm = this;
       vm.isLoading = true;
       const api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/admin/orders?page=${page}`;
-      this.$http.get(api).then(res => {
+      vm.$http.get(api).then(res => {
         vm.order = res.data.orders;
         vm.Pagination = res.data.pagination;
         vm.isLoading = false;
@@ -77,7 +77,8 @@ export default {
     }
   },
   created() {
-    this.getOrder();
+    const vm = this;
+    vm.getOrder();
   }
 };
 </script>

@@ -8,18 +8,18 @@
       <table class="table mt-4">
         <thead>
           <tr>
-            <th width="120">分類</th>
-            <th>產品名稱</th>
-            <th width="120">原價</th>
-            <th width="120">售價</th>
-            <th width="120">是否啟用</th>
-            <th width="120">編輯</th>
+            <th class="text-nowrap" width="120">分類</th>
+            <th class="text-nowrap">產品名稱</th>
+            <th class="text-nowrap" width="120">原價</th>
+            <th class="text-nowrap" width="120">售價</th>
+            <th class="text-nowrap" width="120">是否啟用</th>
+            <th class="text-nowrap" width="120">編輯</th>
           </tr>
         </thead>
         <tbody>
           <tr v-for="(item) in products" :key="item.id">
-            <td>{{item.category}}</td>
-            <td>{{item.title}}</td>
+            <td class="text-nowrap">{{item.category}}</td>
+            <td class="text-nowrap">{{item.title}}</td>
             <td class="text-right">{{item.origin_price | currency}}</td>
             <td class="text-right">{{item.price | currency}}</td>
             <td>
@@ -27,7 +27,7 @@
               <span class="text-danger" v-else>未啟用</span>
             </td>
             <td>
-              <div class="btn-group">
+              <div class="btn-group text-nowrap">
                 <button class="btn btn-outline-primary btn-sm" @click="openModal(false , item)">編輯</button>
                 <button class="btn btn-outline-danger btn-sm" @click="delProductModal(item)">刪除</button>
               </div>
@@ -248,12 +248,13 @@ export default {
       });
     },
     openModal(isNew, item) {
+      const vm = this;
       if (isNew) {
-        this.tempProduct = {};
-        this.isNew = true;
+        vm.tempProduct = {};
+        vm.isNew = true;
       } else {
-        this.tempProduct = Object.assign({}, item);
-        this.isNew = false;
+        vm.tempProduct = Object.assign({}, item);
+        vm.isNew = false;
       }
       $("#productModal").modal("show");
     },
@@ -265,7 +266,7 @@ export default {
         api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/admin/product/${vm.tempProduct.id}`;
         httpMethod = "put";
       }
-      this.$http[httpMethod](api, { data: vm.tempProduct }).then(response => {
+      vm.$http[httpMethod](api, { data: vm.tempProduct }).then(response => {
         if (response.data.success) {
           vm.getProducts();
           $("#productModal").modal("hide");
@@ -273,13 +274,14 @@ export default {
       });
     },
     delProductModal(item) {
-      this.tempProduct = item;
+      const vm = this;
+      vm.tempProduct = item;
       $("#delProductModal").modal("show");
     },
     deldataProduct() {
       const vm = this;
       const api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/admin/product/${vm.tempProduct.id}`;
-      this.$http.delete(api).then(response => {
+      vm.$http.delete(api).then(response => {
         if (response.data.success) {
           vm.getProducts();
           $("#delProductModal").modal("hide");
@@ -294,7 +296,7 @@ export default {
       const formData = new FormData();
       formData.append("file-to-upload", uploadedFile);
       const url = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/admin/upload`;
-      this.$http
+      vm.$http
         .post(url, formData, {
           header: {
             "Content-Type": "multipart/form-data"
@@ -304,7 +306,7 @@ export default {
           if (response.data.success) {
             vm.$set(vm.tempProduct, "imageUrl", response.data.imageUrl);
           } else {
-            this.$bus.$emit("message:push", response.data.message, "danger");
+            vm.$bus.$emit("message:push", response.data.message, "danger");
           }
           document.getElementById(id).value = "";
           vm.fileUploading = false;
@@ -312,7 +314,8 @@ export default {
     }
   },
   created() {
-    this.getProducts();
+    const vm = this;
+    vm.getProducts();
   }
 };
 </script>

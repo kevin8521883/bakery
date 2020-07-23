@@ -8,21 +8,21 @@
       <table class="table mt-4">
         <thead>
           <tr>
-            <th>名稱</th>
-            <th>折扣百分比</th>
-            <th>到期日</th>
-            <th width="120">是否啟用</th>
-            <th width="120">編輯</th>
+            <th class="text-nowrap">名稱</th>
+            <th class="text-nowrap">折扣百分比</th>
+            <th class="text-nowrap">到期日</th>
+            <th class="text-nowrap" width="120">是否啟用</th>
+            <th class="text-nowrap" width="120">編輯</th>
           </tr>
         </thead>
         <tbody>
           <tr v-for="(item) in Coupon" :key="item.id">
-            <td>{{item.title}}</td>
+            <td class="text-nowrap">{{item.title}}</td>
             <td>{{item.percent}}%</td>
             <td>{{item.due_date|date}}</td>
             <td v-if="item.is_enabled" class="text-success">已啟用</td>
             <td v-if="!item.is_enabled" class="text-danger">未啟用</td>
-            <td class="btn-group">
+            <td class="btn-group text-nowrap">
               <button class="btn btn-sm btn-outline-primary" @click="openCouponMOdal(true,item)">編輯</button>
               <button class="btn btn-sm btn-outline-danger" @click="delCoupon(item.id)">刪除</button>
             </td>
@@ -151,13 +151,13 @@ export default {
       vm.isLoading = true;
       if (vm.isNew) {
         const api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/admin/coupon`;
-        this.$http.post(api, { data: vm.tempCoupon }).then(response => {
+        vm.$data.$http.post(api, { data: vm.tempCoupon }).then(response => {
           vm.getCoupon();
           $("#couponModal").modal("hide");
         });
       } else {
         const api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/admin/coupon/${vm.tempCoupon.id}`;
-        this.$http.put(api, { data: vm.tempCoupon }).then(response => {
+        vm.$data.$http.put(api, { data: vm.tempCoupon }).then(response => {
           vm.getCoupon();
           $("#couponModal").modal("hide");
         });
@@ -167,7 +167,7 @@ export default {
       const api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/admin/coupons?page=${page}`;
       const vm = this;
       vm.isLoading = true;
-      this.$http.get(api).then(response => {
+      vm.$http.get(api).then(response => {
         vm.Coupon = response.data.coupons;
         vm.isLoading = false;
       });
@@ -176,14 +176,15 @@ export default {
       const api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/admin/coupon/${id}`;
       const vm = this;
       vm.isLoading = true;
-      this.$http.delete(api).then(response => {
+      vm.$http.delete(api).then(response => {
         vm.getCoupon();
       });
     }
   },
 
   created() {
-    this.getCoupon();
+    const vm = this;
+    vm.getCoupon();
   }
 };
 </script>
