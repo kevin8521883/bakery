@@ -1,5 +1,5 @@
 # 甜點電商網站 （Vue-Cli2 版本）
-# 以更新至Vue-Cli4 -> [Bakery](https://kevin8521883.github.io/VueCli4_Bakery/#/)
+# 已更新至Vue-Cli4 -> [Bakery](https://kevin8521883.github.io/VueCli4_Bakery/#/)
 ### 功能
 前台：
 * 產品展示
