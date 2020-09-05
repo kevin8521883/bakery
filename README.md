@@ -1,22 +1,15 @@
-# VUE_Cli2
-> A Vue.js project
+# 甜點電商網站 （Vue-Cli2 版本）
+# 以更新至Vue-Cli4 -> [Bakery](https://kevin8521883.github.io/VueCli4_Bakery/#/)
+### 功能
+前台：
+* 產品展示
+* 產品收藏
+* 加入購物車
+* 搜尋產品及分類
+* 下單結帳
 
-## Build Setup
-
-``` bash
-# install dependencies
-npm install
-
-# serve with hot reload at localhost:8080
-npm run dev
-
-# build for production with minification
-npm run build
-
-# build for production and view the bundle analyzer report
-npm run build --report
-```
-
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
-# bakery
-
+後台：
+* 產品管理
+* 訂單列表管理
+* 優惠碼管理
+##
